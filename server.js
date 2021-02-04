@@ -3,6 +3,8 @@ const app =express()
 const bodyParser=require('body-parser')
 const cors=require('cors')
 app.use(cors('*'))
+const config = require('./config')
+
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*")
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
@@ -11,15 +13,50 @@ app.use(cors('*'))
 // list of routers
 const routerUser = require('./routes/user')
 const routerVehicle = require('./routes/vehicle')
+const routerShop = require('./routes/shop')
+const routerOrder = require('./routes/order')
 //const routerOffer=require('./routes/offer')
 
 //const app = express()
 
 app.use(bodyParser.json())
+// function getUserId(request, response, next) {
 
+//   if (request.url == '/user/login' 
+//       || request.url == '/user/register'
+//       || request.url.startsWith('/product/image') ) {
+//     // do not check for token 
+//     next()
+//   } else {
+
+//     try {
+//       const token = request.headers['token']
+   
+//       console.log(token)
+//       const data = jwt.verify(token, config.secret)
+//       console.log(data)
+
+   
+
+//       // add a new key named userId with logged in user's id
+//       request.userId = data['id']
+
+//       // go to the actual route
+//       next()
+      
+//     } catch (ex) {
+//       response.status(401)
+//       response.send({status: 'error', error: 'protected api'})
+//     }
+//   }
+// }
+
+// app.use(getUserId)
 // add the routers
 app.use('/user', routerUser)
 app.use('/vehicle', routerVehicle)
+app.use('/shop', routerShop)
+app.use('/order', routerOrder)
 //app.use('/offer', routerOffer)
 
 

@@ -74,11 +74,40 @@ const { request, response } = require('express')
  */
 router.post('/register', (request, response) => {
     const { u_address, u_email, u_first_name, u_last_name, u_mobile ,u_password} = request.body
-  
+
     const encryptedPassword = cryptojs.MD5(u_password)
     const statement = `insert into user ( u_address, u_email, u_first_name, u_last_name, u_mobile ,u_password) 
         values ('${u_address}', '${u_email}', '${u_first_name}', '${u_last_name}','${u_mobile}','${encryptedPassword}' )`
   
+    // db.query(statement, (error, dbResult) => {
+    //   const result = {}
+    //   if (error) {
+    //     // error occurred
+    //   //   console.log(`error: ${error}`)
+    //   //   result['status'] = 'error'
+    //   //   result['error'] = error
+    //     response.send(util.sendError(error))
+    //     console.log(dbResult)
+  
+    //   } else {
+  
+    //     const subject = `'welcome to Bikeclinic'`
+    //     const body = `
+    //     <h1>Welcome to Bikeclinic ${u_first_name}</h1>
+    //     <h2>this is a welcome mesage from shubham</h2>
+    //     `
+    //     mailer.sendEmail(u_email, subject, body, (emailError, info) => {
+  
+    //       // // no error: everything looks Okay
+    //       // console.log(`result: `, result)
+    //       // result['status'] = 'success'
+    //       // result['data'] = dbResult
+    //       response.send(util.sendSuccess(dbResult))
+    //     })
+    //   }
+  
+    // })
+
     db.query(statement, (error, dbResult) => {
       const result = {}
       if (error) {

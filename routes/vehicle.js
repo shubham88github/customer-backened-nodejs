@@ -15,7 +15,7 @@ const { request, response } = require('express')
 
 // v_company_name 
 //  v_model        
-//  v_reg_no       
+//  v_reg_No       
 
 
 
@@ -75,12 +75,12 @@ router.get('/',(request,response) =>{
               
         const data=jwt.verify(token,'12344ksdfflkmklmf')
         const userId=data['id']
-        const{ v_company_name, v_model, v_reg_no }=request.body
+        const{ v_company_name, v_model, v_reg_No }=request.body
         
         const statement= `update vehicle set 
         v_company_name='${v_company_name}',
         v_model='${v_model}',
-        v_reg_no='${v_reg_no}',
+        v_reg_No='${v_reg_No}',
           u_id='${userId}'  
          where  v_id='${v_id}'`
                             
@@ -106,11 +106,11 @@ router.get('/',(request,response) =>{
         const data=jwt.verify(token,'12344ksdfflkmklmf')
         const userId=data['id']
         console.log(userId)
-            const { v_company_name, v_model, v_reg_no} = request.body
+            const { v_company_name, v_model, v_reg_No} = request.body
           
           //  const encryptedPassword = cryptojs.MD5(u_password)
-            const statement = `insert into vehicle ( v_company_name, v_model, v_reg_no,u_id) 
-                values ('${v_company_name}', '${v_model}', '${v_reg_no}','${userId}' )`
+            const statement = `insert into vehicle ( v_company_name, v_model, v_reg_No,u_id) 
+                values ('${v_company_name}', '${v_model}', '${v_reg_No}','${userId}' )`
           
             db.query(statement, (error, dbResult) => {
               const result = {}
@@ -186,7 +186,7 @@ router.get('/',(request,response) =>{
               v_id: tmpVehicle['v_id'],
               v_company_name: tmpVehicle['v_company_name'],
               v_model: tmpVehicle['v_model'],
-              v_reg_no: tmpVehicle['v_reg_no'],
+              v_reg_No: tmpVehicle['v_reg_No'],
               
               
     
@@ -200,6 +200,6 @@ router.get('/',(request,response) =>{
       })
     })
 
-   // v_company_name, v_model, v_reg_no
+   // v_company_name, v_model, v_reg_No
      
      module.exports = router

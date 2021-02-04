@@ -27,7 +27,18 @@ const { request, response } = require('express')
     ////////////////////////////////////////////////////////////////////////////
 
 
-
+/**
+ * @swagger
+ *
+ * /vehicle/:
+ *   get:
+ *     description: For getting vehicle
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.get('/',(request,response) =>{
 
     // const {u_id}= request.params
@@ -98,7 +109,37 @@ router.get('/',(request,response) =>{
      /////////////////////////////////////////////////////////////////////////////
     /////////////////////////////// ADD Vehicle //////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
-
+/**
+ * @swagger
+ *
+ * /vehicle/add:
+ *   post:
+ *     description: For creating offer
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: v_company_name
+ *         description: vehicle company name
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *       - name: v_model
+ *         description: vehicle model name
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *       - name: v_reg_no
+ *         description: vehicle registration number
+ *         in: formData
+ *         required: true
+ *         type: string
+ *      
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
         router.post('/add', (request, response) => {
             const token=request.headers['token']
         
@@ -162,6 +203,19 @@ router.get('/',(request,response) =>{
 /////////////////////////////////////////////////////////////////////////////
     /////////////////////////////// get Vehicleby id //////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
+
+    /**
+ * @swagger
+ *
+ * /vehicle/details:
+ *   get:
+ *     description: For getting vehicle details 
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 
     router.get('/details/:id', (request, response) => {
       const token=request.headers['token']

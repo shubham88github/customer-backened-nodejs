@@ -4,6 +4,9 @@ const bodyParser=require('body-parser')
 const cors=require('cors')
 app.use(cors('*'))
 const config = require('./config')
+// swagger: for api documentation
+const swaggerJSDoc = require('swagger-jsdoc')
+const swaggerUi = require('swagger-ui-express')
 
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*")
@@ -19,37 +22,52 @@ const routerOrder = require('./routes/order')
 
 //const app = express()
 
+// swagger init
+const swaggerOptions = {
+  definition: {
+    info: {
+      title: 'Bike Clinic (Customer Panel)',
+      version: '1.0.0',
+      description: 'This is a Express server for Bike Clinic application'
+    }
+  },
+  apis: ['./routes/*.js']
+}
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use(bodyParser.json())
-// function getUserId(request, response, next) {
+function getUserId(request, response, next) {
 
-//   if (request.url == '/user/login' 
-//       || request.url == '/user/register'
-//       || request.url.startsWith('/product/image') ) {
-//     // do not check for token 
-//     next()
-//   } else {
+  if (request.url == '/user/login' 
+      || request.url == '/user/register'
+      || request.url.startsWith('/product/image') ) {
+    // do not check for token 
+    next()
+  } else {
 
-//     try {
-//       const token = request.headers['token']
+    try {
+      const token = request.headers['token']
    
-//       console.log(token)
-//       const data = jwt.verify(token, config.secret)
-//       console.log(data)
+      console.log(token)
+      const data = jwt.verify(token, config.secret)
+      console.log(data)
 
    
 
-//       // add a new key named userId with logged in user's id
-//       request.userId = data['id']
+      // add a new key named userId with logged in user's id
+      request.userId = data['id']
 
-//       // go to the actual route
-//       next()
+      // go to the actual route
+      next()
       
-//     } catch (ex) {
-//       response.status(401)
-//       response.send({status: 'error', error: 'protected api'})
-//     }
-//   }
-// }
+    } catch (ex) {
+      response.status(401)
+      response.send({status: 'error', error: 'protected api'})
+    }
+  }
+}
 
 // app.use(getUserId)
 // add the routers

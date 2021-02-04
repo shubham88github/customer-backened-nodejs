@@ -26,7 +26,18 @@ const { request, response } = require('express')
 /////////////////////////////// GET VEHICLE //////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
-
+/**
+ * @swagger
+ *
+ * /order/:
+ *   get:
+ *     description: For getting orders
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 
 router.get('/', (request, response) => {
 
@@ -63,7 +74,18 @@ router.get('/', (request, response) => {
 
 })
 
-
+/**
+ * @swagger
+ *
+ * /order/details:
+ *   get:
+ *     description: For getting orders details
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.get('/details/:id', (request, response) => {
 
   const {id}= request.params
@@ -99,7 +121,18 @@ router.get('/details/:id', (request, response) => {
 
 })
 
-
+/**
+ * @swagger
+ *
+ * /order/shop-details:
+ *   get:
+ *     description: For getting shops details
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.get('/shop-details/:id',(request,response) =>{
 
   const {id}= request.params
@@ -132,8 +165,19 @@ router.get('/shop-details/:id',(request,response) =>{
   
   })
 
-
-
+  
+/**
+ * @swagger
+ *
+ * /order/services:
+ *   get:
+ *     description: For getting services
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.get('/services/:id', (request, response) => {
 
   const {id}= request.params
@@ -205,7 +249,31 @@ router.put('/create/:v_id', (request, response) => {
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////// ADD Vehicle //////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
-
+/**
+ * @swagger
+ *
+ * /order/add:
+ *   post:
+ *     description: For creating offer
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: v_id
+ *         description: vehicle ID
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *       - name: ven_id
+ *         description: vendor ID
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.post('/add', (request, response) => {
   const token = request.headers['token']
 
@@ -280,6 +348,19 @@ router.delete('/delete/:id', (request, response) => {
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////// get Vehicleby id //////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
+
+/**
+ * @swagger
+ *
+ * /order/details:
+ *   get:
+ *     description: For getting shops details
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 
 router.get('/details/:id', (request, response) => {
   const token = request.headers['token']

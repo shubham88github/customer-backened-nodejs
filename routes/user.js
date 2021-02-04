@@ -23,6 +23,55 @@ const { request, response } = require('express')
 // | u_password   | varchar(30)  | YES  |     | NULL    |                |
 // +--------------+--------------+------+-----+---------+----------------+
 
+/**
+ * @swagger
+ *
+ * /user/register:
+ *   post:
+ *     description: For creating offer
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: u_address
+ *         description: user address
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *       - name: u_email
+ *         description: user name
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *       - name: u_first_name
+ *         description: user first name
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *       - name: u_last_name
+ *         description: user last name
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *       - name: u_mobile
+ *         description: user mobile number
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *       - name: u_password
+ *         description: user password
+ *         in: formData
+ *         required: true
+ *         type: string
+ *      
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.post('/register', (request, response) => {
     const { u_address, u_email, u_first_name, u_last_name, u_mobile ,u_password} = request.body
   
@@ -64,7 +113,31 @@ router.post('/register', (request, response) => {
 /////////////////////////////// LOGIN //////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
-
+/**
+ * @swagger
+ *
+ * /user/login:
+ *   post:
+ *     description: For creating offer
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: u_email
+ *         description: user email
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *       - name: u_password
+ *         description: user password
+ *         in: formData
+ *         required: true
+ *         type: string
+ * 
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.post('/login',(request,response)=>{
  // const { email , password }= request.body
   const { u_email, u_password } = request.body
@@ -108,7 +181,18 @@ router.post('/login',(request,response)=>{
 /////////////////////////////// GET USER //////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
-
+/**
+ * @swagger
+ *
+ * /user/profile:
+ *   get:
+ *     description: For getting user profile
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 
 router.get('/profile',(request,response) =>{
 
